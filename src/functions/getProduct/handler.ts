@@ -1,7 +1,7 @@
 import 'source-map-support/register';
 
 import Product from '@dbModel/tables/product';
-import getProduct from '@products/getProduct/function';
+import getProduct from './function';
 import { ValidatedEventAPIGatewayProxyEvent, middyfy, Response } from 'utilities-techsweave';
 import { StatusCodes } from 'http-status-codes';
 
