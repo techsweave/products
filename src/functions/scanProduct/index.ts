@@ -1,17 +1,17 @@
 // import schema from './schema';
 import { handlerPath } from 'utilities-techsweave';
-import schema from '@functions/carts/editCart/schema';
+import schema from './schema';
 
 export default {
     handler: `${handlerPath(__dirname)}/handler.main`,
     events: [
         {
             http: {
-                method: 'put',
-                path: 'cart/{id}',
+                method: 'post',
+                path: 'products/filter',
                 cors: true,
                 request: {
-                    schema: {
+                    schemas: {
                         'application/json': schema
                     }
                 }
@@ -19,3 +19,4 @@ export default {
         }
     ]
 };
+
