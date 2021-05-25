@@ -31,7 +31,7 @@ const serverlessConfiguration: AWS = {
             STAGE: '${self:provider.stage}',
             QUEUE: '${self:custom.queue}',
             S3ARN: '${self:custom.s3arn}',
-            PRODUCTS_TABLE: '{self:custom.productsTable}',
+            PRODUCTS_TABLE: '${self:custom.productsTable}',
             USER_POOL_ID: '{self:custom.userPoolId}'
         },
 
