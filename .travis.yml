@@ -10,7 +10,7 @@ install:
 
 script:
   - if [ $TRAVIS_PULL_REQUEST = "true" ]; then serverless; fi
-  - if [ $TRAVIS_BRANCH = "main" ]; then serverless deploy; fi
+  - if [ $TRAVIS_BRANCH = "main" && $TRAVIS_PULL_REQUEST = "false"]; then serverless deploy; fi
 
 branches:
   only:
