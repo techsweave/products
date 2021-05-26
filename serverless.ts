@@ -57,6 +57,7 @@ const serverlessConfiguration: AWS = {
         stage: '${opt:stage, self:provider.stage}',
         queue: 'https://sqs.eu-central-1.amazonaws.com/780844780884/messagesQueue',
         s3arn: 'arn:aws:sns:eu-central-1:780844780884:images',
+        cognitoArn: 'arn:aws:cognito-idp:eu-central-1:780844780884:userpool/eu-central-1_eciEUvwzp',
         productsTable: 'products-table',
         userPoolId: 'eu-central-1_eciEUvwzp',
         dynamodb: {
