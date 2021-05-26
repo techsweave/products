@@ -9,6 +9,10 @@ export default {
                 method: 'put',
                 path: 'products/{id}',
                 cors: true
+            },
+            authorizer: {
+                name: 'ApiGatewayAuthorizer',
+                arn: '${self:custom.cognitoArn}'
             }
         }
     ]
