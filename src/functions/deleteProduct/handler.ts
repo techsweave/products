@@ -13,7 +13,7 @@ const deleteProductHandler: ValidatedEventAPIGatewayProxyEvent<void> = async (ev
     let res: Response<Product>;
     try {
 
-        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.Authorization);
+        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
         if (!(await user.isVendor(process.env.USER_POOL_ID))) {
             throw {
                 name: 'userNotAllowed',
