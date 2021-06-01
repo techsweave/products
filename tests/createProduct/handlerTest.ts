@@ -22,9 +22,11 @@ describe('handler: createProduct', async () => {
         try {
             const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);
             expect(response).to.be.not.null;
+            expect(response.statusCode).to.be.equal(StatusCodes.CREATED);
+
             const body = JSON.parse(response.body);
             await deleteProduct(body.id);
-            expect(response.statusCode).to.be.equal(StatusCodes.CREATED);
+
         } catch (error) {
             expect(error.name).to.be.null;
         }
@@ -42,15 +44,12 @@ describe('handler: createProduct', async () => {
                 title: 'a',
             }
         };
-        try {
-            const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);
-            expect(response, 'response').to.be.not.null;
-            expect(response.statusCode, 'statusCode').to.be.equal(StatusCodes.FORBIDDEN);
+        const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);
+        expect(response, 'response').to.be.not.null;
+        expect(response.statusCode, 'statusCode').to.be.equal(StatusCodes.FORBIDDEN);
 
-            const body = JSON.parse(response.body);
-            expect(body.error.name, 'body.error.name').to.be.equal('UserNotAllowed');
-        } catch (error) {
-            expect(error.name, 'error.name').to.be.null;
-        }
+        const body = JSON.parse(response.body);
+        expect(body.error.name, 'body.error.name').to.be.equal('UserNotAllowed');
+
     });
 });
