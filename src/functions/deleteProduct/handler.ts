@@ -20,7 +20,6 @@ const deleteProductHandler: ValidatedEventAPIGatewayProxyEvent<void> = async (ev
                 message: 'You must be a vendor to delete a product'
             };
         }
-
         res = Response.fromData<Product>(
             await deleteProduct(event.pathParameters.id),
             StatusCodes.OK);

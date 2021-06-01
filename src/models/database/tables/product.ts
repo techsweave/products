@@ -24,7 +24,7 @@ class Product implements Models.Tables.IProduct {
     description?: string;
 
     @attribute()
-    price?: number;
+    price: number;
 
     @attribute()
     discount?: number;

@@ -3,29 +3,38 @@ import scanProduct from '../../src/functions/scanProduct/function';
 // import Product from '../../src/models/database/tables/product';
 
 describe('function: scanProductTest', async () => {
-    it('Working scan', async () => {
-        try {
-            const filter = {
-                limit: 10
-            };
-            expect(await scanProduct(filter)).not.to.be.null;
-        } catch (error) {
-            expect(error.name).equal('ItemNotFoundException');
-        }
+    it('Working scan with 10 limit', async () => {
+        const filter = {
+            limit: 10
+        };
+        const res = await scanProduct(filter);
+        expect(res.items.length).to.be.lessThanOrEqual(10);
     });
 
-    // it('Working scan', async () => {
-    //     try {
-    //         const product: Product = new Product();
-    //         product.id = '484cdb36-c10f-4734-ad44-86b0356893b0';
-    //         product.title = 'black t-shirt';
-    //         product.availabilityQta = 20;
-    //         product.price = 20;
-    //         product.description = 'A beautiful black t-shirt';
-    //         expect(await scanProduct('484cdb36-c10f-4734-ad44-86b0356893b0')).to.be.equal(product);
-    //     } catch (error) {
-    //         expect(error.message).to.be.null;
-    //     }
+    it('Working scan with 1 limit', async () => {
+        const filter = {
+            limit: 1
+        };
+        const res = await scanProduct(filter);
+        expect(res.items.length).to.be.equal(1);
+    });
+
+    // it('Working scan with filter', async () => {
+    //     const filter = {
+    //         limit: 10,
+    //         filter: {
+    //             // type: 'And',
+    //             // conditions: [
+    //             //     {
+    //             type: 'Equals',
+    //             subject: '484cdb36-c10f-4734-ad44-86b0356893b0',
+    //             object: 'id'
+    //             //}
+    //             //]
+    //         }
+    //     };
+    //     const res = await scanProduct(filter);
+    //     expect(res.items.length).to.be.equal(1);
     // });
 });
 

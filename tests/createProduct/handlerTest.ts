@@ -16,20 +16,16 @@ describe('handler: createProduct', async () => {
                 AccessToken: await test.getAccessToken()
             },
             body: {
-                title: 'a',
+                title: 'testCreateProduct',
             }
         };
-        try {
-            const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);
-            expect(response).to.be.not.null;
-            expect(response.statusCode).to.be.equal(StatusCodes.CREATED);
+        const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);
+        expect(response).to.be.not.null;
+        expect(response.statusCode).to.be.equal(StatusCodes.CREATED);
 
-            const body = JSON.parse(response.body);
-            await deleteProduct(body.id);
+        const body = JSON.parse(response.body);
+        await deleteProduct(body.data.id);
 
-        } catch (error) {
-            expect(error.name).to.be.null;
-        }
     });
 
     it('Customer creation', async () => {
@@ -39,9 +35,8 @@ describe('handler: createProduct', async () => {
             headers: {
                 AccessToken: await test.getAccessToken()
             },
-            // pathParameters: '',
             body: {
-                title: 'a',
+                title: 'testCreateProduct',
             }
         };
         const response: APIGatewayProxyResult = await createProductHandler(e, fakeContext);

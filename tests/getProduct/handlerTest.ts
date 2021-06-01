@@ -5,7 +5,7 @@ import Product from '../../src/models/database/tables/product';
 
 describe('handler: getProduct', async () => {
 
-    it('Should return a response with a specific Product, if the id exists', async () => {
+    it('Working get', async () => {
 
         const expectedProduct: Product = {
             id: '484cdb36-c10f-4734-ad44-86b0356893b0',
@@ -33,7 +33,7 @@ describe('handler: getProduct', async () => {
         expect(body.data, 'body.data').to.be.deep.equal(expectedProduct);
     });
 
-    it('Should return a response with error ItemNotFoundException, if the id doesn\'t exists', async () => {
+    it('Not working get', async () => {
 
         const event: IFakeEvent = {
             pathParameters: {
