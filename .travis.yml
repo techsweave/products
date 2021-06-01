@@ -9,6 +9,7 @@ install:
   - npx eslint src
 
 script:
+  - npm run test
   - serverless deploy
 
 branches:

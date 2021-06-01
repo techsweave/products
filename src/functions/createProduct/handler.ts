@@ -18,7 +18,7 @@ const createProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = 
         const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
         if (!(await user.isVendor(process.env.USER_POOL_ID))) {
             throw {
-                name: 'userNotAllowed',
+                name: 'UserNotAllowed',
                 message: 'You must be a vendor to create a product'
             };
         }

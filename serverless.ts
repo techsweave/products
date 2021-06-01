@@ -32,7 +32,7 @@ const serverlessConfiguration: AWS = {
             QUEUE: '${self:custom.queue}',
             S3ARN: '${self:custom.s3arn}',
             PRODUCTS_TABLE: '${self:custom.productsTable}',
-            USER_POOL_ID: '{self:custom.userPoolId}'
+            USER_POOL_ID: '${self:custom.userPoolId}'
         },
 
         iam: {
@@ -61,7 +61,7 @@ const serverlessConfiguration: AWS = {
         productsTable: 'products-table',
         userPoolId: 'eu-central-1_eciEUvwzp',
         dynamodb: {
-            stages: ['dev'],
+            stages: ['test', 'dev'],
             start: {
                 port: 8008,
                 inMemory: true,
@@ -87,7 +87,8 @@ const serverlessConfiguration: AWS = {
     plugins: [
         'serverless-webpack',
         'serverless-offline',
-        'serverless-dynamodb-local'
+        'serverless-dynamodb-local',
+        'serverless-export-env'
     ],
 
 

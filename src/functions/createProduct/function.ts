@@ -7,3 +7,4 @@ const createProduct = async (item: Product): Promise<Product> => {
 };
 
 export default createProduct;
+
