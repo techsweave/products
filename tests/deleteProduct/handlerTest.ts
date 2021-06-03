@@ -15,7 +15,7 @@ describe('handler: deleteProduct', async () => {
     expectedProduct.price = 20;
     expectedProduct.availabilityQta = 20;
     expectedProduct.SKU = 'SKU12345';
-    
+
     it('Vendor working delete', async () => {
         AWS.config.update({ region: process.env.REGION });
         const test = await TestUser.fromRole(true, process.env.USER_POOL_ID);
@@ -29,6 +29,23 @@ describe('handler: deleteProduct', async () => {
         const response: APIGatewayProxyResult = await deleteProductHandler(e, fakeContext);
         expect(response).to.be.not.null;
         await createProduct(expectedProduct);
+
+    });
+
+    it('Vendor not working delete', async () => {
+        AWS.config.update({ region: process.env.REGION });
+        const test = await TestUser.fromRole(true, process.env.USER_POOL_ID);
+        const e: IFakeEvent = {
+            headers: {
+                AccessToken: await test.getAccessToken()
+            },
+            pathParameters: 'Not existing at all'
+        };
+        const response: APIGatewayProxyResult = await deleteProductHandler(e, fakeContext);
+        expect(response.statusCode, 'response.statusCode').to.be.equal(StatusCodes.NOT_FOUND);
+
+        const body = JSON.parse(response.body);
+        expect(body.error.name).to.be.equal('ItemNotFoundException');
 
     });
 

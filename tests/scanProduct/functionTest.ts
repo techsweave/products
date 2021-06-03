@@ -19,22 +19,22 @@ describe('function: scanProductTest', async () => {
         expect(res.items.length).to.be.equal(1);
     });
 
-    // it('Working scan with filter', async () => {
-    //     const filter = {
-    //         limit: 10,
-    //         filter: {
-    //             // type: 'And',
-    //             // conditions: [
-    //             //     {
-    //             type: 'Equals',
-    //             subject: '484cdb36-c10f-4734-ad44-86b0356893b0',
-    //             object: 'id'
-    //             //}
-    //             //]
-    //         }
-    //     };
-    //     const res = await scanProduct(filter);
-    //     expect(res.items.length).to.be.equal(1);
-    // });
+    it('Working scan with filter', async () => {
+        const filter = {
+            limit: 10,
+            filter: {
+                // type: 'And',
+                // conditions: [
+                //     {
+                type: 'Equals',
+                subject: 20,
+                object: 'price'
+                //}
+                //]
+            }
+        };
+        const res = await scanProduct(filter);
+        expect(res.items.length).to.be.greaterThanOrEqual(1);
+    });
 });
 
