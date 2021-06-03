@@ -1,6 +1,5 @@
 import 'source-map-support/register';
 
-import Product from '@dbModel/tables/product';
 import decreaseAvailability from './function';
 import { ValidatedEventSQSEvent, middyfy } from 'utilities-techsweave';
 import schema from './schema';
@@ -11,10 +10,7 @@ import schema from './schema';
 const getProductHandler: ValidatedEventSQSEvent<typeof schema> = async (event) => {
 
     try {
-        const product: Product = new Product();
-        product.id = event.Records[0].messageAttributes.id.stringValue;
-        product.availabilityQta = parseInt(event.Records[0].messageAttributes.availabilityQta.stringValue);
-        await decreaseAvailability(product);
+        await decreaseAvailability(event.Records[0].messageAttributes.id.stringValue, parseInt(event.Records[0].messageAttributes.availabilityQta.stringValue));
     }
     catch (error) {
         //console.log prints to AWS CloudWatch
