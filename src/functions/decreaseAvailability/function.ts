@@ -1,10 +1,10 @@
 import dbContext from '@dbModel/dbContext';
 import Product from '@dbModel/tables/product';
+import getProduct from '@functions/getProduct/function';
 
 const decreaseAvailability = async (id: string, availabilityQta: number): Promise<Product> => {
-    const product: Product = new Product();
-    product.id = id;
-    product.availabilityQta = availabilityQta;
+    const product: Product = await getProduct(id);
+    product.availabilityQta -= availabilityQta;
     return dbContext.update(product, { onMissing: 'skip' });
 };
 
