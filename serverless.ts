@@ -5,7 +5,8 @@ import {
     deleteProduct,
     getProduct,
     scanProduct,
-    updateProduct
+    updateProduct,
+    decreaseAvailability
 } from '@functions/index';
 
 const serverlessConfiguration: AWS = {
@@ -97,7 +98,8 @@ const serverlessConfiguration: AWS = {
         deleteProduct,
         getProduct,
         scanProduct,
-        updateProduct
+        updateProduct,
+        decreaseAvailability
     },
 
 };
