@@ -9,7 +9,8 @@ const deleteProduct = async (id: string): Promise<Product> => {
     //delete linked image if exists
     if (item.imageURL) {
         const s3 = new AWS.S3();
-        await s3.deleteObject({ Bucket: process.env.BUCKET_NAME, Key: '' });//Image.createFromUrl(item.imageURL) }).promise();
+        const image: Image = await Image.createImageFromS3Url(item.imageURL);
+        await s3.deleteObject({ Bucket: process.env.BUCKET_NAME, Key: await image.getKey() });//
     }
 
     return dbContext.delete(item);
