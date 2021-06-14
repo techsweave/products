@@ -24,17 +24,17 @@ const updateProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = 
         const product: Product = new Product();
 
         product.id = event.pathParameters?.id;
-        product.title = event.body.title;
-        product.description = event.body?.description;
+        product.title = event.body.title; //change SKU
+        product.description = event.body?.description; //change SKU
         product.price = event.body.price;
         product.discount = event.body?.discount;
         product.availabilityQta = event.body?.availabilityQta;
         product.imageURL = event.body?.imageURL;
-        product.isSalable = event.body?.isSalable;
-        product.categorieId = event.body?.categorieId;
+        product.isSalable = event.body?.isSalable; // to change to false when create new SKU
+        product.categorieId = event.body?.categorieId; //change SKU
         product.notes = event.body?.notes;
         product.tags = event.body?.tags;
-        product.customSpecs = event.body?.customSpecs;
+        product.customSpecs = event.body?.customSpecs; //change SKU
 
         response = Response.fromData<Product>(
             await updateProduct(product),
