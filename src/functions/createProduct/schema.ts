@@ -31,5 +31,5 @@ export default {
         }
 
     },
-    required: ['title', 'price']
+    required: ['title', 'price', 'categorieId']
 } as const;
