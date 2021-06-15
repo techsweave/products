@@ -2,9 +2,10 @@ import dbContext from '@dbModel/dbContext';
 import Product from '@dbModel/tables/product';
 import getProduct from '@functions/getProduct/function';
 import createProduct from '@functions/createProduct/function';
-
+import * as AWS from 'aws-sdk';
 const updateProduct = async (item: Product): Promise<Product> => {
     const product = await getProduct(item.id, true);
+    const sns = new AWS.SNS();
 
     if (
         item.title != product.title ||
@@ -28,8 +29,29 @@ const updateProduct = async (item: Product): Promise<Product> => {
             tags: item.tags ? item.tags : product.tags,
             customSpecs: item.customSpecs ? item.customSpecs : product.customSpecs,
         });
+        await sns.publish({
+            Message: 'createdNewProduct',
+            MessageAttributes: {
+                productId: {
+                    DataType: 'String',
+                    StringValue: item.id,
+                }
+            },
+            TopicArn: 'arn:aws:sns:eu-central-1:780844780884:changeCartOnUpdate'
+        }).promise();
         return createProduct(newProduct);
+
     } else {
+        await sns.publish({
+            Message: 'updatedProduct',
+            MessageAttributes: {
+                productId: {
+                    DataType: 'String',
+                    StringValue: item.id,
+                }
+            },
+            TopicArn: 'arn:aws:sns:eu-central-1:780844780884:changeCartOnUpdate',
+        }).promise();
         return dbContext.update(item, { onMissing: 'skip' });
     }
 };
