@@ -9,8 +9,8 @@ const getProduct = async (id: string, isVendor: boolean): Promise<Partial<Produc
         return product;
     else {
         if (product.isSalable) {
-            //return ret;
             const ret: Partial<Product> = Object.assign({
+                id: product.id,
                 title: product.title,
                 SKU: product.SKU,
                 description: product.description,

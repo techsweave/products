@@ -40,7 +40,7 @@ const scanProduct = async (filter: any, isVendor: boolean): Promise<{
         pageSize: filter?.pageSize,
         startKey: filter?.startKey,
         filter: conditionFilter,
-        projection: isVendor ? undefined : ['title', 'SKU', 'description', 'price', 'categorieId', 'discount', 'availabilityQta', 'imageURL', 'tags', 'customSpecs']
+        projection: isVendor ? undefined : ['id', 'title', 'SKU', 'description', 'price', 'categorieId', 'discount', 'availabilityQta', 'imageURL', 'tags', 'customSpecs']
     };
 
     const paginator = dbContext.scan(Product, dbFilter).pages();
