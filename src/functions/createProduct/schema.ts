@@ -6,7 +6,7 @@ export default {
         price: { type: 'number' },
         discount: { type: 'number' },
         availabilityQta: { type: 'number' },
-        imageURL: { type: 'string' },
+        imagePath: { type: 'string' },
         isSalable: { type: 'boolean' },
         categorieId: { type: 'string' },
         notes: { type: 'string' },
@@ -31,5 +31,5 @@ export default {
         }
 
     },
-    required: ['title', 'price']
+    required: ['title', 'price', 'categorieId']
 } as const;

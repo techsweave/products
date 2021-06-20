@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import Product from '@dbModel/tables/product';
 import scanProduct from './function';
 
-import { ValidatedEventAPIGatewayProxyEvent, middyfy, Response } from 'utilities-techsweave';
+import { ValidatedEventAPIGatewayProxyEvent, middyfy, Response, AuthenticatedUser } from 'utilities-techsweave';
 import StatusCodes from 'http-status-codes';
 
 import schema from './schema';
@@ -15,9 +15,15 @@ import schema from './schema';
 */
 const scanProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
     let res: Response<Product> = new Response<Product>();
-
+    let isVendor: boolean;
     try {
-        const result = await scanProduct(event.body);
+        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
+        isVendor = await user.isVendor(process.env.USER_POOL_ID);
+    } catch (err) {
+        isVendor = false;
+    }
+    try {
+        const result = await scanProduct(event.body, isVendor);
         res = Response.fromMultipleData(result.items, StatusCodes.OK, result.lastKey);
 
     } catch (error) {

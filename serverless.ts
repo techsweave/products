@@ -33,7 +33,8 @@ const serverlessConfiguration: AWS = {
             QUEUE: '${self:custom.queue}',
             S3ARN: '${self:custom.s3arn}',
             PRODUCTS_TABLE: '${self:custom.productsTable}',
-            USER_POOL_ID: '{self:custom.userPoolId}'
+            USER_POOL_ID: '${self:custom.userPoolId}',
+            BUCKET_NAME: '${self:custom.bucketName}'
         },
 
         iam: {
@@ -61,6 +62,7 @@ const serverlessConfiguration: AWS = {
         cognitoArn: 'arn:aws:cognito-idp:eu-central-1:780844780884:userpool/eu-central-1_eciEUvwzp',
         productsTable: 'products-table',
         userPoolId: 'eu-central-1_eciEUvwzp',
+        bucketName: 'techsweave-images-bucket',
         dynamodb: {
             stages: ['dev'],
             start: {
