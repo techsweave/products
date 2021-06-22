@@ -13,6 +13,18 @@ const deleteProduct = async (id: string): Promise<Product> => {
         await s3.deleteObject({ Bucket: process.env.BUCKET_NAME, Key: await image.getKey() });
     }
 
+    const sns = new AWS.SNS();
+    await sns.publish({
+        Message: 'deletedProduct',
+        MessageAttributes: {
+            productId: {
+                DataType: 'String',
+                StringValue: item.id,
+            }
+        },
+        TopicArn: 'arn:aws:sns:eu-central-1:780844780884:productInCartNotAvailable'
+    }).promise();
+
     return dbContext.delete(item);
 };
 
