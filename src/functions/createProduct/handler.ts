@@ -37,10 +37,10 @@ const createProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = 
         product.tags = event.body?.tags;
         product.customSpecs = event.body?.customSpecs;
 
-        res = Response.fromData<Product>(await createProduct(product), StatusCodes.CREATED);
+        res = await Response.fromData<Product>(await createProduct(product), StatusCodes.CREATED);
 
     } catch (error) {
-        res = Response.fromError<Product>(error);
+        res = await Response.fromError<Product>(error);
     }
     return res.toAPIGatewayProxyResult();
 };

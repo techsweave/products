@@ -21,12 +21,12 @@ const deleteProductHandler: ValidatedEventAPIGatewayProxyEvent<void> = async (ev
             };
         }
 
-        res = Response.fromData<Product>(
+        res = await Response.fromData<Product>(
             await deleteProduct(event.pathParameters.id),
             StatusCodes.OK);
 
     } catch (error) {
-        res = Response.fromError<Product>(error);
+        res = await Response.fromError<Product>(error);
     }
     return res.toAPIGatewayProxyResult();
 };
