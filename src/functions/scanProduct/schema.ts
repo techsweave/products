@@ -5,7 +5,7 @@ export default {
             type: 'object',
             properties: {
                 type: { type: 'string' },
-                object: { type: 'object' },
+                object: { type: ['number', 'string', 'object'] },
                 subject: { type: 'string' },
                 lowerBound: { type: 'number' },
                 upperBound: { type: 'number' },
