@@ -1,7 +1,7 @@
 import dbContext from '@dbModel/dbContext';
 import Product from '@dbModel/tables/product';
 
-const getProduct = async (id: string, isVendor: boolean): Promise<Partial<Product>> => {
+const getProduct = async (id: string, isVendor: boolean): Promise<Product> => {
     const item: Product = new Product();
     item.id = id;
     const product = await dbContext.get(item);
@@ -9,7 +9,7 @@ const getProduct = async (id: string, isVendor: boolean): Promise<Partial<Produc
         return product;
     else {
         if (product.isSalable) {
-            const ret: Partial<Product> = Object.assign({
+            const ret: Product = Object.assign({
                 id: product.id,
                 title: product.title,
                 SKU: product.SKU,
