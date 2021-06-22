@@ -24,10 +24,10 @@ const scanProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
     }
     try {
         const result = await scanProduct(event.body, isVendor);
-        res = Response.fromMultipleData(result.items, StatusCodes.OK, result.lastKey);
+        res = await Response.fromMultipleData(result.items, StatusCodes.OK, result.lastKey);
 
     } catch (error) {
-        res = Response.fromError<Product>(error);
+        res = await Response.fromError<Product>(error);
     }
     return res.toAPIGatewayProxyResult();
 };

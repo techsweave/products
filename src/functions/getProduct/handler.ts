@@ -19,12 +19,12 @@ const getProductHandler: ValidatedEventAPIGatewayProxyEvent<void> = async (event
     }
     let response: Response<Partial<Product>>;
     try {
-        response = Response.fromData<Partial<Product>>(
+        response = await Response.fromData<Partial<Product>>(
             await getProduct(event.pathParameters?.id, isVendor),
             StatusCodes.OK);
     }
     catch (error) {
-        response = Response.fromError<Partial<Product>>(error);
+        response = await Response.fromError<Partial<Product>>(error);
     }
     return response.toAPIGatewayProxyResult();
 };

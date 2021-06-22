@@ -36,13 +36,13 @@ const updateProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = 
         product.tags = event.body?.tags;
         product.customSpecs = event.body?.customSpecs; //change SKU
 
-        response = Response.fromData<Product>(
+        response = await Response.fromData<Product>(
             await updateProduct(product),
             StatusCodes.OK
         );
     }
     catch (error) {
-        response = Response.fromError<Product>(error);
+        response = await Response.fromError<Product>(error);
     }
     return response.toAPIGatewayProxyResult();
 };
