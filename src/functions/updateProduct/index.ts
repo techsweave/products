@@ -8,7 +8,13 @@ export default {
             http: {
                 method: 'put',
                 path: 'products/{id}',
-                cors: true
+                cors: {
+                    origin: '*',
+                    allowCredentials: true,
+                    headers: [
+                        '*'
+                    ]
+                },
             },
             authorizer: {
                 name: 'ApiGatewayAuthorizer',

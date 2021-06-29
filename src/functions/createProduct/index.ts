@@ -9,7 +9,13 @@ export default {
             http: {
                 method: 'post',
                 path: 'products',
-                cors: true,
+                cors: {
+                    origin: '*',
+                    allowCredentials: true,
+                    headers: [
+                        '*'
+                    ]
+                },
                 request: {
                     schemas: {
                         'application/json': schema
