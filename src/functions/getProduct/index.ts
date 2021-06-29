@@ -8,7 +8,13 @@ export default {
             http: {
                 method: 'get',
                 path: 'products/{id}',
-                cors: true
+                cors: {
+                    origin: '*',
+                    allowCredentials: true,
+                    headers: [
+                        '*'
+                    ]
+                },
             }
         }
     ]
