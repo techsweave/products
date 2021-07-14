@@ -13,7 +13,7 @@ import { StatusCodes } from 'http-status-codes';
 const updateProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
     let response: Response<Product>;
     try {
-        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
+        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.accesstoken);
         if (!(await user.isVendor(process.env.USER_POOL_ID))) {
             throw {
                 name: 'UserNotAllowed',
