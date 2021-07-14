@@ -12,7 +12,7 @@ import { StatusCodes } from 'http-status-codes';
 const getProductHandler: ValidatedEventAPIGatewayProxyEvent<void> = async (event) => {
     let isVendor: boolean;
     try {
-        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
+        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.accesstoken);
         isVendor = await user.isVendor(process.env.USER_POOL_ID);
     } catch (err) {
         isVendor = false;

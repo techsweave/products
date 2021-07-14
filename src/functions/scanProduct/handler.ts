@@ -17,7 +17,7 @@ const scanProductHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
     let res: Response<Product> = new Response<Product>();
     let isVendor: boolean;
     try {
-        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.AccessToken);
+        const user: AuthenticatedUser = await AuthenticatedUser.fromToken(event.headers?.accesstoken);
         isVendor = await user.isVendor(process.env.USER_POOL_ID);
     } catch (err) {
         isVendor = false;

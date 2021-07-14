@@ -23,7 +23,7 @@ export default {
                 properties: {
                     fieldName: { type: 'string' },
                     unitMisure: { type: 'string' },
-                    value: { type: 'object' }
+                    value: { type: 'string' }
                 },
                 required: ['fieldName', 'unitMisure', 'value']
             },
