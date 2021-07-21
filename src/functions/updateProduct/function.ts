@@ -6,6 +6,9 @@ const updateProduct = async (item: Product): Promise<Product> => {
     const product = await getProduct(item.id, true);
     const sns = new AWS.SNS();
     let ret;
+    if (!product.isSalable) {
+        return dbContext.update(item, { onMissing: 'skip' });
+    }
     if (
         item.title != product.title ||
         item.price != product.price ||
