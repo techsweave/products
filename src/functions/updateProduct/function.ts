@@ -12,9 +12,12 @@ const updateProduct = async (item: Product): Promise<Product> => {
     if (
         item.title != product.title ||
         item.price != product.price ||
-        item.customSpecs.map((item, i) => {
-            item.value != product.customSpecs[i].value;
-        })
+        (
+            item.customSpecs &&
+            item.customSpecs.map((item, i) => {
+                item.value != product.customSpecs[i].value;
+            })
+        )
     ) {
         product.isSalable = false;
         await dbContext.update(product);
