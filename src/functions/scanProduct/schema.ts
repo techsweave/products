@@ -5,7 +5,7 @@ export default {
             type: 'object',
             properties: {
                 type: { type: 'string' },
-                object: { type: ['number', 'string', 'object'] },
+                object: { type: ['number', 'string', 'object', 'boolean'] },
                 values: {
                     type: 'array',
                     items: {
