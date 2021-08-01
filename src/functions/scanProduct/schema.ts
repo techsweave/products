@@ -5,11 +5,11 @@ export default {
             type: 'object',
             properties: {
                 type: { type: 'string' },
-                object: { type: ['number', 'string', 'object'] },
+                object: { type: ['number', 'string', 'boolean', 'object'] },
                 values: {
                     type: 'array',
                     items: {
-                        type: ['number', 'string', 'object']
+                        type: ['number', 'string', 'boolean', 'object']
                     }
                 },
                 subject: { type: 'string' },
